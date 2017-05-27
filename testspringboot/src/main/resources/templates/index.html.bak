@@ -1,0 +1,22 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>进入 </title>
+        <style type="text/css">
+        
+        audio::-internal-media-controls-download-button {display:none;}
+		audio::-webkit-media-controls {overflow: hidden !important}
+		audio::-webkit-media-controls-enclosure {width: calc(100% + 52px);}
+        </style>
+    </head>
+    <body>
+    <center>
+    		    欢迎进入<input th:value="${user.user.name}" />
+      </center>
+     <audio controls="controls" preload="auto"  >
+  <source src="http://leweike-audio.qiniudn.com/d5befe6b71be4611a2ff7a8a38642efa.aac" type="audio/mpeg" />
+</audio>
+    </body>
+</html>  

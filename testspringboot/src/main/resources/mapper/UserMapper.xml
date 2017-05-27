@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.app.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.test.app.vo.User" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="account" property="account" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="createUserId" property="createUserId" jdbcType="VARCHAR" />
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="updateUserId" property="updateUserId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, status,account,password, telephone, remark, createTime, createUserId, updateTime, updateUserId
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    
+    <select id="findUser" resultMap="BaseResultMap"  >
+        select 
+        <include refid="Base_Column_List" />
+        from user
+    </select>
+    
+    <select id="findTelephone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from user where telephone = #{telephone,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from user where account = #{account,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.test.app.vo.User" >
+        insert into user ( name, status, 
+            telephone, remark, createTime, 
+            createUserId, updateTime, updateUserId
+            )
+        values ( #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+            #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{createUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.test.app.vo.User" >
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+          
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="telephone != null" >
+                telephone,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                createTime,
+            </if>
+            <if test="createUserId != null" >
+                createUserId,
+            </if>
+            <if test="updateTime != null" >
+                updateTime,
+            </if>
+            <if test="updateUserId != null" >
+                updateUserId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+          
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null" >
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null" >
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null" >
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.test.app.vo.User" >
+        update user
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null" >
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null" >
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                updateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null" >
+                updateUserId = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.test.app.vo.User" >
+        update user
+        set name = #{name,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            telephone = #{telephone,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            createTime = #{createTime,jdbcType=TIMESTAMP},
+            createUserId = #{createUserId,jdbcType=VARCHAR},
+            updateTime = #{updateTime,jdbcType=TIMESTAMP},
+            updateUserId = #{updateUserId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>
